@@ -1,13 +1,18 @@
 import { useTriviaContext } from '../state/TriviaContext';
+import { PageBody } from '../components/PageBody';
+import { VerticalStack } from '../components/VerticalStack';
+import { Typography, Button } from '@mui/material';
 
 export const TriviaErrorPage = () => {
   const { endQuiz } = useTriviaContext();
   return (
-    <main style={{ padding: '1rem 0' }}>
-      <h1>Eroor</h1>
-      <span>Ooops... something went wrong! :(</span>
-      <button onClick={endQuiz}>Retry?</button>
-    </main>
+    <PageBody>
+      <VerticalStack>
+        <Typography variant='h3'>Error</Typography>
+        <Typography variant='body1'>Ooops... something went wrong! :(</Typography>
+        <Button variant="contained" fullWidth onClick={endQuiz}>Retry?</Button>
+      </VerticalStack>
+    </PageBody>
   );
 };
 

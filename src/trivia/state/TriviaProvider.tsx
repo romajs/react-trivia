@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import * as Transformers from '../TriviaQuestionTransformer';
 import { TriviaAPI } from '../TriviaAPI';
 import { TriviaContext } from './TriviaContext';
@@ -23,16 +23,17 @@ export const TriviaProvider = ({
   triviaApi,
 }: TriviaProviderProps) => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [state, dispatch] = useReducer(triviaReducer, initialState);
 
   useEffect(() => {
-    console.log(state.questions?.length, checkStartPage());
-    if (!state.questions?.length && !checkStartPage()) {
+    if (!state.questions?.length && !error && !checkStartPage()) {
       onRetry();
     }
   }, [state, checkStartPage, onRetry]);
 
-  const beginQuiz = useCallback(() => {
+  const beginQuiz = () => {
+    setError(false);
     setLoading(true);
     triviaApi
       .listQuestions()
@@ -45,14 +46,15 @@ export const TriviaProvider = ({
         onBegin();
       })
       .catch(() => {
+        setError(true);
         onError();
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [triviaApi, dispatch, onBegin]);
+  };
 
-  const nextQuestion = useCallback(() => {
+  const nextQuestion = () => {
     const nextQuestionIndex = !state.currentQuestion ? 1 : state.currentQuestion.index + 1;
     if (nextQuestionIndex <= state.questions.length) {
       const question = state.questions[nextQuestionIndex - 1];
@@ -60,21 +62,18 @@ export const TriviaProvider = ({
     } else {
       onEnd();
     }
-  }, [state, dispatch, onEnd]);
+  };
 
-  const answerQuestion = useCallback(
-    (value: string) => {
-      const answer = state.currentQuestion?.correctAnswer === value;
-      dispatch({ type: TriviaActionType.PushAnswer, payload: { answer } });
-      nextQuestion();
-    },
-    [state, dispatch, nextQuestion]
-  );
+  const answerQuestion = (value: boolean) => {
+    const answer = state.currentQuestion?.correctAnswer === value;
+    dispatch({ type: TriviaActionType.PushAnswer, payload: { answer } });
+    nextQuestion();
+  };
 
-  const endQuiz = useCallback(() => {
+  const endQuiz = () => {
     dispatch({ type: TriviaActionType.Reset });
     onRetry();
-  }, [dispatch, onRetry]);
+  };
 
   const currentQuestion: Question | undefined = useMemo(() => state.currentQuestion, [state]);
 

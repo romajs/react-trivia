@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 
 type TriviaContextType = {
-  answerQuestion: (value: string) => void;
+  answerQuestion: (value: boolean) => void;
   answers: boolean[],
   beginQuiz: () => void;
   currentQuestion: Question | undefined;

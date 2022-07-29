@@ -1,7 +1,7 @@
 type Question = {
   category: string;
   answers: string[];
-  correctAnswer: string;
+  correctAnswer: boolean;
   index: number;
   name: string;
 };

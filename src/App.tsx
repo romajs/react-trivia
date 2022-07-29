@@ -1,4 +1,3 @@
-import './App.css';
 import { AppRoutes } from './AppRoutes';
 import { history } from './history';
 import { Routes, Route, Navigate } from 'react-router-dom';

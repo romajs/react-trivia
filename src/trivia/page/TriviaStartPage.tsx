@@ -1,16 +1,19 @@
+import { Button,  Typography } from '@mui/material';
+import { PageBody } from '../components/PageBody';
 import { useTriviaContext } from '../state/TriviaContext';
+import { VerticalStack } from '../components/VerticalStack';
 
 export const TriviaWelcomePage = () => {
   const { beginQuiz, loading } = useTriviaContext();
   return (
-    <main style={{ padding: '1rem 0' }}>
-      <h1>Welcome to the Trivia Challenge!</h1>
-      <div>
-        <span>You will be presented with 10 True or False questions</span>
-        <span>Can you score 100%?</span>
-      </div>
-      <button onClick={beginQuiz} disabled={loading}>{!loading ? 'Begin' : 'Loading...'}</button>
-    </main>
+    <PageBody>
+      <VerticalStack>
+        <Typography variant='h3'>Welcome to the Trivia Challenge!</Typography>
+        <Typography variant='body1'>You will be presented with 10 True or False questions</Typography>
+        <Typography variant='body1'>Can you score 100%?</Typography>
+        <Button variant="contained" onClick={beginQuiz} disabled={loading}>{!loading ? 'Begin' : 'Loading...'}</Button>
+      </VerticalStack>
+    </PageBody>
   );
 };
 

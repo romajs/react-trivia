@@ -23,7 +23,6 @@ export const initialState: TriviaState = {
 };
 
 export const triviaReducer = (state: TriviaState, action: TriviaAction): TriviaState => {
-  // console.debug('[triviaReducer]:', { state, action });
   switch (action.type) {
   case TriviaActionType.Reset:
     return initialState;

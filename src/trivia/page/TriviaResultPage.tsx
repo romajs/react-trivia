@@ -1,19 +1,36 @@
+import { Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { PageBody } from '../components/PageBody';
 import { useTriviaContext } from '../state/TriviaContext';
+import { VerticalStack } from '../components/VerticalStack';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import he from 'he';
+
+const AnswerIcon = ({ value }) => (
+  value ? <CheckIcon color='success' /> : <CloseIcon color='error' />
+);
 
 export const TriviaResultPage = () => {
   const { answers, questions, endQuiz } = useTriviaContext();
   return (
-    <main style={{ padding: '1rem 0' }}>
-      <h1>You scored</h1>
-      <ul>
-        {questions.map(question => (
-          <li>
-            <span>{String(answers[question.index])}&nbsp;-&nbsp;{question.name}</span>
-          </li>
-        ))}
-      </ul>
-      <button onClick={endQuiz}>Play again?</button>
-    </main>
+    <PageBody>
+      <VerticalStack>
+        <Typography variant='h3'>You scored</Typography>
+        <List>
+          {questions.map(question => (
+            <ListItem key={question.index} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AnswerIcon value={answers[question.index]} />
+                </ListItemIcon>
+                <ListItemText primary={he.decode(question.name)} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Button variant="contained" onClick={endQuiz}>Play again?</Button>
+      </VerticalStack>
+    </PageBody>
   );
 };
 
