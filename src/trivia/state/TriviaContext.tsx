@@ -2,13 +2,13 @@ import { createContext, useContext } from 'react';
 
 type TriviaContextType = {
   answerQuestion: (value: boolean) => void;
-  answers: boolean[],
+  answers: boolean[];
   beginQuiz: () => void;
   currentQuestion: Question | undefined;
   endQuiz: () => void;
   loading: boolean;
   nextQuestion: () => void;
-  questions: Question[],
+  questions: Question[];
   totalQuestions: number;
 };
 

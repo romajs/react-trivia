@@ -6,8 +6,21 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import he from 'he';
 
-const AnswerIcon = ({ value }) => (
-  value ? <CheckIcon color='success' /> : <CloseIcon color='error' />
+const AnswerIcon = ({ value }) => (value ? <CheckIcon color="success" /> : <CloseIcon color="error" />);
+
+const AnwerList = ({ answers, questions }) => (
+  <List style={{ overflowY: 'scroll' }}>
+    {questions?.map((question) => (
+      <ListItem key={question.index} disablePadding>
+        <ListItemButton>
+          <ListItemIcon>
+            <AnswerIcon value={answers[question.index]} />
+          </ListItemIcon>
+          <ListItemText primary={he.decode(question.name)} />
+        </ListItemButton>
+      </ListItem>
+    ))}
+  </List>
 );
 
 export const TriviaResultPage = () => {
@@ -15,20 +28,11 @@ export const TriviaResultPage = () => {
   return (
     <PageBody fireworks>
       <VerticalStack>
-        <Typography variant='h3'>You scored</Typography>
-        <List>
-          {questions.map(question => (
-            <ListItem key={question.index} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <AnswerIcon value={answers[question.index]} />
-                </ListItemIcon>
-                <ListItemText primary={he.decode(question.name)} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Button variant="contained" onClick={endQuiz}>Play again?</Button>
+        <Typography variant="h3">You scored</Typography>
+        <AnwerList answers={answers} questions={questions} />
+        <Button variant="contained" onClick={endQuiz}>
+          Play again?
+        </Button>
       </VerticalStack>
     </PageBody>
   );

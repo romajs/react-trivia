@@ -8,9 +8,11 @@ export const TriviaErrorPage = () => {
   return (
     <PageBody>
       <VerticalStack>
-        <Typography variant='h3'>Error</Typography>
-        <Typography variant='body1'>Ooops... something went wrong! :(</Typography>
-        <Button variant="contained" fullWidth onClick={endQuiz}>Retry?</Button>
+        <Typography variant="h3">Error</Typography>
+        <Typography variant="body1">Ooops... something went wrong! :(</Typography>
+        <Button variant="contained" fullWidth onClick={endQuiz}>
+          Retry?
+        </Button>
       </VerticalStack>
     </PageBody>
   );
