@@ -13,7 +13,7 @@ const AnswerIcon = ({ value }) => (
 export const TriviaResultPage = () => {
   const { answers, questions, endQuiz } = useTriviaContext();
   return (
-    <PageBody>
+    <PageBody fireworks>
       <VerticalStack>
         <Typography variant='h3'>You scored</Typography>
         <List>
