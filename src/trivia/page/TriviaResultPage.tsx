@@ -9,7 +9,7 @@ import he from 'he';
 const AnswerIcon = ({ value }) => (value ? <CheckIcon color="success" /> : <CloseIcon color="error" />);
 
 const AnwerList = ({ answers, questions }) => (
-  <List style={{ overflowY: 'scroll' }}>
+  <List style={{ overflowY: 'auto' }}>
     {questions?.map((question) => (
       <ListItem key={question.index} disablePadding>
         <ListItemButton>

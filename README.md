@@ -2,10 +2,6 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Challenge
-
-[G2i React Web Test - March 2021 Version](https://public.3.basecamp.com/p/a9VLMKqmcL2hD19Be6UWym2b)
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -48,3 +44,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Screenshots
+
+![](./screenshots/01.png)
+![](./screenshots/02.png)
+![](./screenshots/03.png)
+
+---
+
+romajs @ 2022
